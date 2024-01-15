@@ -79,7 +79,7 @@ resource "aws_lambda_function" "terraform_lambda_func" {
 resource "aws_lambda_permission" "apigw_lambda" {
   statement_id  = "AllowExecutionFromSNS"
   action        = "lambda:InvokeFunction"
-  source_arn    = "${aws_sns_topic.sns_topic[0].arn}"
+  source_arn    = "${aws_sns_topic.sns_topic.arn}"
   function_name = aws_lambda_function.terraform_lambda_func.function_name
   principal     = "sns.amazonaws.com"
 
@@ -89,8 +89,8 @@ resource "aws_lambda_permission" "apigw_lambda" {
  
  
 resource "aws_sns_topic" "sns_topic" {
-  name                        = var.fifo_topic ? "${var.sns_topic_name}-${count.index + 1}.fifo" : "${var.sns_topic_name}-${count.index + 1}"
-  delivery_policy             = var.delivery_policy
+  name                        = var.fifo_topic ? "${var.sns_topic_name}-.fifo" : "${var.sns_topic_name}"
+  # delivery_policy             = var.delivery_policy
   fifo_topic                  = var.fifo_topic
   content_based_deduplication = var.fifo_topic ? var.content_based_deduplication : null
   kms_master_key_id           = var.kms_master_key_id
@@ -101,7 +101,7 @@ resource "aws_sns_topic" "sns_topic" {
 }
  
 resource "aws_sns_topic_subscription" "subscription" {
-  topic_arn                       = aws_sns_topic.sns_topic[0].arn
+  topic_arn                       = aws_sns_topic.sns_topic.arn
   protocol                        = var.protocol
   endpoint                        = aws_lambda_function.terraform_lambda_func.arn
   subscription_role_arn           = var.protocol == "firehose" ? var.subscription_role_arn : null

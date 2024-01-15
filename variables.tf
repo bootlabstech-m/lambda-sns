@@ -4,10 +4,10 @@ variable "region" {
   type        = string
 }
 
-variable "role_arn" {
-  description = "role_arn for resource creation."
-  type        = string
-}
+# variable "role_arn" {
+#   description = "role_arn for resource creation."
+#   type        = string
+# }
 
 variable "name" {
   description = "Unique name for your Lambda Function."
@@ -47,10 +47,10 @@ variable "sns_topic_name" {
   description = "sns_topic_names to create.Apeend the name with .fifo if creating FIFO queues."
   type        = string
 }
-variable "delivery_policy" {
-  description = "delivery_policy"
-  type        = string
-}
+# variable "delivery_policy" {
+#   description = "delivery_policy"
+#   type        = string
+# }
 variable "fifo_topic" {
   description = "whether fifo topic"
   type        = bool
