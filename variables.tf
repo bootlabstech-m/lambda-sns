@@ -4,10 +4,10 @@ variable "region" {
   type        = string
 }
 
-# variable "role_arn" {
-#   description = "role_arn for resource creation."
-#   type        = string
-# }
+variable "role_arn" {
+  description = "role_arn for resource creation."
+  type        = string
+}
 
 variable "name" {
   description = "Unique name for your Lambda Function."
@@ -68,10 +68,10 @@ variable "tracing_config" {
   type        = string
 }
 
-variable "topic_arn" {
-  description = "The topic arn of the subscription"
-  type        = string
-}
+# variable "topic_arn" {
+#   description = "The topic arn of the subscription"
+#   type        = string
+# }
 variable "protocol" {
   description = "Protocol"
   type        = string
